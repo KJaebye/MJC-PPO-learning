@@ -31,19 +31,17 @@ import numpy as np
 
 
 class Config:
-    def __init__(self, domain, task, rec=None):
-        self.domain = domain
-        self.task = task
+    def __init__(self, env_name, rec=None):
+        self.env_name = env_name
         self.rec = rec
 
         # load .yml
-        cfg_path = './config/cfg/**/%s/%s.yml' % (domain, task)
+        cfg_path = './config/cfg/**/%s.yml' % env_name
         files = glob.glob(cfg_path, recursive=True)
         assert len(files) == 1, "{} file(s) is/are found.".format(len(files))
         cfg = yaml.safe_load(open(files[0], 'r'))
 
         # training config
-        self.env_name = cfg.get('env_name')
         self.agent_spec = cfg.get('agent_spec', dict)
         self.gamma = cfg.get('gamma', 0.995)
         self.tau = cfg.get('tau', 0.95)

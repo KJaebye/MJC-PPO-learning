@@ -40,27 +40,14 @@ def collect_samples(pid, queue, env, policy, custom_reward, mean_action, render,
     num_episodes = 0
 
     while num_steps < min_batch_size:
-        def process_dm_ctrl_observation(time_step):
-            """ Flatten the dm_control observation. """
-            observation_flatten = np.array([])
-            for k in time_step.observation:
-                if time_step.observation[k].shape:
-                    observation_flatten = np.concatenate((observation_flatten, time_step.observation[k].flatten()))
-                else:
-                    observation_flatten = np.concatenate((observation_flatten, np.array([time_step.observation[k]])))
-            reward = time_step.reward
-            done = time_step.last()
-            return observation_flatten, reward, done
-
-        time_step = env.reset()
-        observation, reward, done = process_dm_ctrl_observation(time_step)
+        observation, _ = env.reset()
         state = observation
 
         if running_state is not None:
             state = running_state(state)
         reward_episode = 0
 
-        for t in range(10000):
+        for t in range(1000):
             state_var = torch.tensor(state).unsqueeze(0)
             with torch.no_grad():
                 if mean_action:
@@ -69,8 +56,7 @@ def collect_samples(pid, queue, env, policy, custom_reward, mean_action, render,
                     action = policy.select_action(state_var)[0].numpy()
             action = int(action) if policy.is_disc_action else action.astype(np.float64)
 
-            time_step = env.step(action)
-            observation, reward, done = process_dm_ctrl_observation(time_step)
+            observation, reward, terminated, truncated, info = env.step(action)
             next_state = observation
 
             reward_episode += reward
@@ -83,11 +69,11 @@ def collect_samples(pid, queue, env, policy, custom_reward, mean_action, render,
                 min_c_reward = min(min_c_reward, reward)
                 max_c_reward = max(max_c_reward, reward)
 
-            mask = 0 if done else 1
+            mask = 0 if terminated else 1
 
             memory.push(state, action, mask, next_state, reward)
 
-            if done:
+            if terminated:
                 break
 
             state = next_state

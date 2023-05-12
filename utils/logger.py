@@ -51,7 +51,7 @@ class Logger(logging.Logger):
         self.cfg = cfg
         # log output dir
         self.output_dir = './tmp'
-        self.sub_dir = '/%s/%s' % (cfg.domain, cfg.task)
+        self.sub_dir = '/%s' % cfg.env_name
         self.time_str = datetime.now().strftime("%Y%m%d_%H%M%S")
         self.target_dir = '/' + self.time_str
         self.output_dir = self.output_dir + self.sub_dir + self.target_dir
@@ -64,7 +64,7 @@ class Logger(logging.Logger):
         setattr(cfg, 'tb_dir', self.tb_dir)
 
         # log output file
-        self.prefix = cfg.domain + '_' + cfg.task + '-'
+        self.prefix = cfg.env_name + '-'
         self.file_name = self.prefix + self.time_str + '.log'
         # training related attributes
         self.num_steps = 0

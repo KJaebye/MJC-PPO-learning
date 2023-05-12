@@ -45,15 +45,15 @@ class AgentPPO2(Agent):
             self.load_checkpoint(checkpoint)
 
     def setup_networks(self):
-        self.running_state = ZFilter((self.env.state_dim,), clip=5)
+        self.running_state = ZFilter((self.env.observation_space.shape[0],), clip=5)
 
         """define actor and critic"""
-        self.policy_net = Policy(self.env.state_dim,
-                                 self.env.action_dim,
+        self.policy_net = Policy(self.env.observation_space.shape[0],
+                                 self.env.action_space.shape[0],
                                  hidden_size=self.cfg.policy_spec['mlp'],
                                  activation=self.cfg.policy_spec['htype'],
                                  log_std=self.cfg.policy_spec['log_std'])
-        self.value_net = Value(self.env.state_dim,
+        self.value_net = Value(self.env.observation_space.shape[0],
                                hidden_size=self.cfg.value_spec['mlp'],
                                activation=self.cfg.value_spec['htype'])
 
@@ -70,10 +70,10 @@ class AgentPPO2(Agent):
 
     def load_checkpoint(self, checkpoint):
         if isinstance(checkpoint, int):
-            checkpoint_path = './tmp/%s/%s/%s/models/iter_%04d.p' % (self.cfg.domain, self.cfg.task, self.cfg.rec, checkpoint)
+            checkpoint_path = './tmp/%s/%s/models/iter_%04d.p' % (self.cfg.env_name, self.cfg.rec, checkpoint)
         else:
             assert isinstance(checkpoint, str)
-            checkpoint_path = './tmp/%s/%s/%s/models/%s.p' % (self.cfg.domain, self.cfg.task, self.cfg.rec, checkpoint)
+            checkpoint_path = './tmp/%s/%s/models/%s.p' % (self.cfg.env_name, self.cfg.rec, checkpoint)
 
         model_checkpoint = pickle.load(open(checkpoint_path, "rb"))
         self.logger.critical('Loading model from checkpoint: %s' % checkpoint_path)
