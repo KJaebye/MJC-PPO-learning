@@ -59,7 +59,7 @@ class Config:
         self.value_weight_decay = cfg.get('value_weight_decay', 0.0)
 
         self.adv_clip = cfg.get('adv_clip', np.inf)
-        self.l2_reg = cfg.get('l2_reg', 1e-3)
+        self.l2_reg = cfg.get('l2_reg', 1.e-3)
         self.entropy_coeff = cfg.get('entropy_coeff', 1.e-2)
         self.clip_epsilon = cfg.get('clip_epsilon', 0.2)
         self.optim_num_epoch = cfg.get('optim_num_epoch', 10)

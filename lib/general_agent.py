@@ -32,7 +32,7 @@ class GeneralAgent(AgentPPO2):
         if self.training:
             self.env = gym.make(env_name)
         else:
-            self.env = gym.make(env_name, render_mode="human")
+            self.env = gym.make(env_name, render_mode='human')
 
     def display(self, num_episode=1, mean_action=True):
         env = self.env

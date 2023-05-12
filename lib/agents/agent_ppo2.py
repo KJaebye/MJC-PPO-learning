@@ -179,9 +179,11 @@ class AgentPPO2(Agent):
                     self.ppo_step(self.policy_net, self.value_net, self.optimizer_policy, self.optimizer_value,
                                   1, states_b, actions_b, returns_b, advantages_b, fixed_log_probs_b,
                                   self.cfg.clip_epsilon, self.cfg.l2_reg, iter)
-                policy_loss.append(policy_loss_i.detach().numpy())
-                value_loss.append(value_loss_i.detach().numpy())
-                entropy.append(entropy_i.detach().numpy())
+
+                policy_loss.append(policy_loss_i.detach().cpu().numpy())
+                value_loss.append(value_loss_i.detach().cpu().numpy())
+                entropy.append(entropy_i.detach().cpu().numpy())
+
             self.logger.info('| %16.4f | %16.4f | %16.4f |' %
                              (np.mean(policy_loss), np.mean(value_loss), np.mean(entropy)))
 
@@ -194,7 +196,7 @@ class AgentPPO2(Agent):
             value_loss = (values_pred - returns).pow(2).mean()
             # weight decay
             for param in value_net.parameters():
-                value_loss += param.pow(2).sum() * float(l2_reg)
+                value_loss += param.pow(2).sum() * l2_reg
             optimizer_value.zero_grad()
             value_loss.backward()
             optimizer_value.step()
@@ -209,6 +211,7 @@ class AgentPPO2(Agent):
         surr2 = torch.clamp(ratio, 1.0 - clip_epsilon, 1.0 + clip_epsilon) * advantages
         policy_surr = -torch.min(surr1, surr2).mean()
         # policy_surr = -torch.min(surr1, surr2).mean() - self.cfg.entropy_coeff * entropy
+
         optimizer_policy.zero_grad()
         policy_surr.backward()
         torch.nn.utils.clip_grad_norm_(policy_net.parameters(), 40)

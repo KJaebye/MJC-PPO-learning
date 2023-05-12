@@ -5,12 +5,16 @@
 # ------------------------------------------------------------------------------------------------------------------- #
 
 import logging
+
+import objgraph
 import torch
 import numpy as np
 from config.get_args import get_args
 from config.config import Config
 from utils.logger import Logger
 from lib.general_agent import GeneralAgent
+# import gc
+from objgraph import show_growth
 
 if __name__ == "__main__":
     args = get_args()
@@ -51,4 +55,6 @@ if __name__ == "__main__":
         agent.optimize(iter)
         # clean up GPU memory
         torch.cuda.empty_cache()
+        # objgraph.show_growth(limit=10)
+        # gc.collect()
     agent.logger.critical('Training completed!')

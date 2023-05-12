@@ -24,10 +24,7 @@ if platform.system() != "Linux":
 def collect_samples(pid, queue, env, policy, custom_reward, mean_action, render, running_state, min_batch_size):
     if pid > 0:
         torch.manual_seed(torch.randint(0, 5000, (1,)) * pid)
-        if hasattr(env, 'np_random'):
-            env.np_random.seed(env.np_random.randint(5000) * pid)
-        if hasattr(env, 'env') and hasattr(env.env, 'np_random'):
-            env.env.np_random.seed(env.env.np_random.randint(5000) * pid)
+
     log = dict()
     memory = Memory()
     num_steps = 0
@@ -40,7 +37,7 @@ def collect_samples(pid, queue, env, policy, custom_reward, mean_action, render,
     num_episodes = 0
 
     while num_steps < min_batch_size:
-        observation, _ = env.reset()
+        observation, _ = env.reset(seed=pid)
         state = observation
 
         if running_state is not None:

@@ -43,3 +43,6 @@ python display.py --env_name Ant --rec 20230512_222444 --iter best
 The project is based on the Gymnasium and MuJoCo official python bindings.
 Just run `train.py` and use pip install missed packages.
 
+# Results
+Ant:
+![avatar](utils/Ant_result.jpg)
