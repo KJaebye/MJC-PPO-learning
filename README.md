@@ -28,7 +28,7 @@ parses commands from terminal, **config.py** loads .yml files.
 ----------------------
 
 # Usage
-Training:
+Train from scratch:
 ```commandline
 python train.py --env_name Ant
 ```
