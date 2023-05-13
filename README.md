@@ -48,3 +48,5 @@ Ant:
 ![avatar](utils/Ant_result.jpg)
 BipedalWalker:
 ![avatar](utils/BipedalWalker_result.jpg)
+Hopper-v4:
+![avatar](utils/Hopper-v4_result.jpg)
