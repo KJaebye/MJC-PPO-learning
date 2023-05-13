@@ -46,3 +46,5 @@ Just run `train.py` and use pip install missed packages.
 # Results
 Ant:
 ![avatar](utils/Ant_result.jpg)
+BipedalWalker:
+![avatar](utils/BipedalWalker_result.jpg)

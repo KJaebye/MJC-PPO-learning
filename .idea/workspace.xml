@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b798a7f0-cf73-4205-a1c4-805b8c3b1f32" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/cfg/BipedalWalker.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/cfg/BipedalWalkerHardcore.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/MJC-PPO-learning.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/cfg/Hopper.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/agents/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/agents/agent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/agents/agent_ppo2.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/agents/agent_ppo2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/general_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/general_agent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +51,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683906811773</updated>
-      <workItem from="1683906812793" duration="8600000" />
+      <workItem from="1683906812793" duration="10191000" />
     </task>
     <servers />
   </component>
